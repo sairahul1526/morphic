@@ -18,7 +18,6 @@ func (f *SummaryFilter) ToQuery() (string, []interface{}) {
 	if f.OnContract != nil {
 		conditions = append(conditions, "on_contract = $"+strconv.Itoa(i))
 		args = append(args, *f.OnContract)
-		i++
 	}
 
 	if len(conditions) > 0 {

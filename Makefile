@@ -31,7 +31,7 @@ test-coverage:
 
 docs:
 	swag init
-	promlinter list metrics/metric.go metrics/app.go metrics/externalapi.go --output md --add-help > docs/metrics.md
+	promlinter list metrics/metric.go --output md --add-help > docs/metrics.md
 
 setup:
 	go install github.com/yeya24/promlinter/cmd/promlinter@v0.3.0

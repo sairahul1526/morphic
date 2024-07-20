@@ -25,7 +25,6 @@ func (f UserFilter) ToQuery() (string, []interface{}) {
 	if len(f.Password) > 0 {
 		conditions = append(conditions, "password = $"+strconv.Itoa(i))
 		args = append(args, f.Password)
-		i++
 	}
 
 	if len(conditions) > 0 {

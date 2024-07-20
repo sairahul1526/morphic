@@ -5,18 +5,16 @@ go 1.20
 require (
 	github.com/DATA-DOG/go-sqlmock v1.5.2
 	github.com/MakeNowJust/heredoc v1.0.0
-	github.com/alecthomas/assert v0.0.0-20170929043011-405dbfeb8e38
-	github.com/aws/aws-sdk-go v1.53.4
 	github.com/gin-contrib/cors v1.4.0
+	github.com/gin-contrib/gzip v1.0.1
 	github.com/gin-gonic/gin v1.10.0
 	github.com/go-playground/validator/v10 v10.20.0
+	github.com/golang-jwt/jwt v3.2.2+incompatible
 	github.com/golang-jwt/jwt/v4 v4.5.0
 	github.com/google/uuid v1.4.0
 	github.com/jackc/pgconn v1.14.1
 	github.com/jackc/pgerrcode v0.0.0-20220416144525-469b46aa5efa
 	github.com/jmoiron/sqlx v1.3.5
-	github.com/lib/pq v1.10.0
-	github.com/peterstace/simplefeatures v0.50.0
 	github.com/prometheus/client_golang v1.11.0
 	github.com/raystack/salt v0.3.2
 	github.com/rs/xid v1.5.0
@@ -31,8 +29,6 @@ require (
 require (
 	github.com/KyleBanks/depth v1.2.1 // indirect
 	github.com/alecthomas/chroma v0.8.2 // indirect
-	github.com/alecthomas/colour v0.0.0-20160524082231-60882d9e2721 // indirect
-	github.com/alecthomas/repr v0.0.0-20180818092828-117648cd9897 // indirect
 	github.com/aymerick/douceur v0.2.0 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/briandowns/spinner v1.18.0 // indirect
@@ -50,7 +46,6 @@ require (
 	github.com/fatih/color v1.7.0 // indirect
 	github.com/fsnotify/fsnotify v1.4.9 // indirect
 	github.com/gabriel-vasile/mimetype v1.4.3 // indirect
-	github.com/gin-contrib/gzip v1.0.1 // indirect
 	github.com/gin-contrib/sse v0.1.0 // indirect
 	github.com/go-openapi/jsonpointer v0.20.0 // indirect
 	github.com/go-openapi/jsonreference v0.20.2 // indirect
@@ -60,7 +55,6 @@ require (
 	github.com/go-playground/universal-translator v0.18.1 // indirect
 	github.com/go-sql-driver/mysql v1.6.0 // indirect
 	github.com/goccy/go-json v0.10.2 // indirect
-	github.com/golang-jwt/jwt v3.2.2+incompatible // indirect
 	github.com/golang-migrate/migrate/v4 v4.15.2 // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/google/go-cmp v0.5.9 // indirect
@@ -80,6 +74,7 @@ require (
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/klauspost/cpuid/v2 v2.2.7 // indirect
 	github.com/leodido/go-urn v1.4.0 // indirect
+	github.com/lib/pq v1.10.0 // indirect
 	github.com/lucasb-eyer/go-colorful v1.2.0 // indirect
 	github.com/magiconair/properties v1.8.5 // indirect
 	github.com/mailru/easyjson v0.7.7 // indirect
@@ -106,7 +101,6 @@ require (
 	github.com/rivo/uniseg v0.2.0 // indirect
 	github.com/russross/blackfriday/v2 v2.1.0 // indirect
 	github.com/schollz/progressbar/v3 v3.8.5 // indirect
-	github.com/sergi/go-diff v1.0.0 // indirect
 	github.com/spf13/afero v1.9.2 // indirect
 	github.com/spf13/cast v1.3.1 // indirect
 	github.com/spf13/jwalterweatherman v1.1.0 // indirect
