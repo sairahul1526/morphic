@@ -1,0 +1,500 @@
+definitions:
+  api.Error:
+    properties:
+      code:
+        type: string
+      details: {}
+      message:
+        type: string
+    type: object
+  api.ErrorResponse:
+    properties:
+      error:
+        $ref: '#/definitions/api.Error'
+    type: object
+  constant.EmployeeCurrency:
+    enum:
+    - USD
+    - TAINRSKING
+    type: string
+    x-enum-varnames:
+    - EmployeeCurrencyUSD
+    - EmployeeCurrencyINR
+  constant.EmployeeDepartment:
+    enum:
+    - Administration
+    - Banking
+    - Engineering
+    - Operations
+    type: string
+    x-enum-varnames:
+    - EmployeeDepartmentAdministration
+    - EmployeeDepartmentBanking
+    - EmployeeDepartmentEngineering
+    - EmployeeDepartmentOperations
+  constant.EmployeeStatus:
+    enum:
+    - Active
+    - Inactive
+    type: string
+    x-enum-varnames:
+    - EmployeeStatusActive
+    - EmployeeStatusInactive
+  constant.EmployeeSubDepartment:
+    enum:
+    - Platform
+    - Loan
+    - CustomerOnboarding
+    - Agriculture
+    type: string
+    x-enum-varnames:
+    - EmployeeSubDepartmentPlatform
+    - EmployeeSubDepartmentLoan
+    - EmployeeSubDepartmentCustomerOnboarding
+    - EmployeeSubDepartmentAgriculture
+  constant.UserStatus:
+    enum:
+    - Active
+    - Inactive
+    type: string
+    x-enum-varnames:
+    - UserStatusActive
+    - UserStatusInactive
+  employee.DepartmentSummaries:
+    properties:
+      department:
+        type: string
+      summaries:
+        items:
+          $ref: '#/definitions/employee.SubDepartmentSummary'
+        type: array
+      summary:
+        $ref: '#/definitions/github_com_sairahul1526_morphic_api_employee.Summary'
+    type: object
+  employee.DepartmentSummaryResponse:
+    properties:
+      summaries:
+        items:
+          $ref: '#/definitions/employee.DepartmentSummaries'
+        type: array
+    type: object
+  employee.ReadResponse:
+    properties:
+      created_at:
+        example: "2024-05-27T06:50:20.056549Z"
+        type: string
+      created_by:
+        example: e31ab6f8-d359-4c6a-83c6-bfa32229bb01
+        type: string
+      currency:
+        allOf:
+        - $ref: '#/definitions/constant.EmployeeCurrency'
+        example: USD
+      department:
+        allOf:
+        - $ref: '#/definitions/constant.EmployeeDepartment'
+        example: Engineering
+      id:
+        example: 47435e2b-d8c4-41ff-9de9-2be3bfc92276
+        type: string
+      name:
+        example: John Doe
+        type: string
+      on_contract:
+        example: true
+        type: boolean
+      salary:
+        example: 100000
+        type: integer
+      status:
+        allOf:
+        - $ref: '#/definitions/constant.EmployeeStatus'
+        example: Active
+      sub_department:
+        allOf:
+        - $ref: '#/definitions/constant.EmployeeSubDepartment'
+        example: Platform
+      updated_at:
+        example: "2024-05-27T06:50:20.056549Z"
+        type: string
+      updated_by:
+        example: e31ab6f8-d359-4c6a-83c6-bfa32229bb01
+        type: string
+    type: object
+  employee.Request:
+    properties:
+      currency:
+        allOf:
+        - $ref: '#/definitions/constant.EmployeeCurrency'
+        enum:
+        - USD
+        - INR
+        example: USD
+      department:
+        allOf:
+        - $ref: '#/definitions/constant.EmployeeDepartment'
+        enum:
+        - Administration
+        - Banking
+        - Engineering
+        - Operations
+        example: Engineering
+      name:
+        example: John Doe
+        type: string
+      on_contract:
+        example: true
+        type: boolean
+      salary:
+        example: 100000
+        type: integer
+      status:
+        allOf:
+        - $ref: '#/definitions/constant.EmployeeStatus'
+        enum:
+        - Active
+        - Inactive
+        example: Active
+      sub_department:
+        allOf:
+        - $ref: '#/definitions/constant.EmployeeSubDepartment'
+        enum:
+        - Platform
+        - Loan
+        - CustomerOnboarding
+        - Agriculture
+        example: Platform
+    required:
+    - name
+    - on_contract
+    - salary
+    type: object
+  employee.SubDepartmentSummary:
+    properties:
+      sub_department:
+        type: string
+      summary:
+        $ref: '#/definitions/github_com_sairahul1526_morphic_api_employee.Summary'
+    type: object
+  github_com_sairahul1526_morphic_api_employee.Summary:
+    properties:
+      max:
+        type: number
+      mean:
+        type: number
+      min:
+        type: number
+    type: object
+  user.LoginRequest:
+    properties:
+      password:
+        example: password
+        type: string
+      username:
+        example: john.doe
+        type: string
+    required:
+    - password
+    - username
+    type: object
+  user.ReadResponse:
+    properties:
+      created_at:
+        example: "2024-05-27T06:50:20.056549Z"
+        type: string
+      created_by:
+        example: e31ab6f8-d359-4c6a-83c6-bfa32229bb01
+        type: string
+      id:
+        example: 47435e2b-d8c4-41ff-9de9-2be3bfc92276
+        type: string
+      status:
+        allOf:
+        - $ref: '#/definitions/constant.UserStatus'
+        example: Active
+      updated_at:
+        example: "2024-05-27T06:50:20.056549Z"
+        type: string
+      updated_by:
+        example: e31ab6f8-d359-4c6a-83c6-bfa32229bb01
+        type: string
+      username:
+        example: john.doe
+        type: string
+    type: object
+host: localhost:8060
+info:
+  contact: {}
+  title: Morphic API
+  version: 0.0.1
+paths:
+  /api/v1/employees:
+    delete:
+      parameters:
+      - description: Employee IDs
+        in: query
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/api.ErrorResponse'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/api.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/api.ErrorResponse'
+        "409":
+          description: Conflict
+          schema:
+            $ref: '#/definitions/api.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/api.ErrorResponse'
+        "501":
+          description: Not Implemented
+          schema:
+            $ref: '#/definitions/api.ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: Delete a employee
+      tags:
+      - Employee
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Request Body
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/employee.Request'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/employee.ReadResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/api.ErrorResponse'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/api.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/api.ErrorResponse'
+        "409":
+          description: Conflict
+          schema:
+            $ref: '#/definitions/api.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/api.ErrorResponse'
+        "501":
+          description: Not Implemented
+          schema:
+            $ref: '#/definitions/api.ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: Add a new employee
+      tags:
+      - Employee
+  /api/v1/employees/summary:
+    get:
+      parameters:
+      - description: Filter by contract type
+        in: query
+        name: on_contract
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/github_com_sairahul1526_morphic_api_employee.Summary'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/api.ErrorResponse'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/api.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/api.ErrorResponse'
+        "409":
+          description: Conflict
+          schema:
+            $ref: '#/definitions/api.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/api.ErrorResponse'
+        "501":
+          description: Not Implemented
+          schema:
+            $ref: '#/definitions/api.ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: Get salary summary
+      tags:
+      - Summary
+  /api/v1/employees/summary/department:
+    get:
+      parameters:
+      - description: Filter by contract type
+        in: query
+        name: on_contract
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/employee.DepartmentSummaryResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/api.ErrorResponse'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/api.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/api.ErrorResponse'
+        "409":
+          description: Conflict
+          schema:
+            $ref: '#/definitions/api.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/api.ErrorResponse'
+        "501":
+          description: Not Implemented
+          schema:
+            $ref: '#/definitions/api.ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: Get salary summary by department
+      tags:
+      - Summary
+  /api/v1/employees/summary/subdepartment:
+    get:
+      parameters:
+      - description: Filter by contract type
+        in: query
+        name: on_contract
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/employee.DepartmentSummaryResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/api.ErrorResponse'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/api.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/api.ErrorResponse'
+        "409":
+          description: Conflict
+          schema:
+            $ref: '#/definitions/api.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/api.ErrorResponse'
+        "501":
+          description: Not Implemented
+          schema:
+            $ref: '#/definitions/api.ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: Get salary summary by department and sub-department
+      tags:
+      - Summary
+  /api/v1/users/login:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Request Body
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/user.LoginRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/user.ReadResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/api.ErrorResponse'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/api.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/api.ErrorResponse'
+        "409":
+          description: Conflict
+          schema:
+            $ref: '#/definitions/api.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/api.ErrorResponse'
+        "501":
+          description: Not Implemented
+          schema:
+            $ref: '#/definitions/api.ErrorResponse'
+      summary: Login a user
+      tags:
+      - User
+schemes:
+- http
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

@@ -1,0 +1,39 @@
+version: "3.7"
+
+networks:
+  morphic-net:
+    driver: bridge
+
+services:
+  db:
+    image: postgis/postgis
+    container_name: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: wDnfWovh4uf3
+      POSTGRES_DB: morphic
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./postgresql:/var/lib/postgresql
+      - ./postgresql_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - morphic-net
+
+  morphic:
+    build: .
+    image: morphic:dev
+    ports:
+      - "8060:8060"
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - morphic-net
+    environment:
+      - DATABASE_URL=postgres://postgres:wDnfWovh4uf3@db:5432/morphic?sslmode=disable

@@ -1,0 +1,19 @@
+service:
+  host: 0.0.0.0
+  port: 8060
+  allowed_origins: "http://localhost"
+
+metrics:
+  port: 9090
+  enabled: 1
+
+log:
+  level: info
+
+database:
+  driver: postgres
+  url: postgres://xxx:xxx@xxx:5432/xxx?sslmode=disable
+  max_query_timeout: 500ms
+
+auth:
+  secret_encoded: "xxx"

@@ -1,0 +1,767 @@
+{
+    "schemes": [
+        "http"
+    ],
+    "swagger": "2.0",
+    "info": {
+        "title": "Morphic API",
+        "contact": {},
+        "version": "0.0.1"
+    },
+    "host": "localhost:8060",
+    "paths": {
+        "/api/v1/employees": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Employee"
+                ],
+                "summary": "Add a new employee",
+                "parameters": [
+                    {
+                        "description": "Request Body",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/employee.Request"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/employee.ReadResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/api.ErrorResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/api.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/api.ErrorResponse"
+                        }
+                    },
+                    "409": {
+                        "description": "Conflict",
+                        "schema": {
+                            "$ref": "#/definitions/api.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/api.ErrorResponse"
+                        }
+                    },
+                    "501": {
+                        "description": "Not Implemented",
+                        "schema": {
+                            "$ref": "#/definitions/api.ErrorResponse"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Employee"
+                ],
+                "summary": "Delete a employee",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Employee IDs",
+                        "name": "id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/api.ErrorResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/api.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/api.ErrorResponse"
+                        }
+                    },
+                    "409": {
+                        "description": "Conflict",
+                        "schema": {
+                            "$ref": "#/definitions/api.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/api.ErrorResponse"
+                        }
+                    },
+                    "501": {
+                        "description": "Not Implemented",
+                        "schema": {
+                            "$ref": "#/definitions/api.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/employees/summary": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Summary"
+                ],
+                "summary": "Get salary summary",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Filter by contract type",
+                        "name": "on_contract",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_sairahul1526_morphic_api_employee.Summary"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/api.ErrorResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/api.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/api.ErrorResponse"
+                        }
+                    },
+                    "409": {
+                        "description": "Conflict",
+                        "schema": {
+                            "$ref": "#/definitions/api.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/api.ErrorResponse"
+                        }
+                    },
+                    "501": {
+                        "description": "Not Implemented",
+                        "schema": {
+                            "$ref": "#/definitions/api.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/employees/summary/department": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Summary"
+                ],
+                "summary": "Get salary summary by department",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Filter by contract type",
+                        "name": "on_contract",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/employee.DepartmentSummaryResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/api.ErrorResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/api.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/api.ErrorResponse"
+                        }
+                    },
+                    "409": {
+                        "description": "Conflict",
+                        "schema": {
+                            "$ref": "#/definitions/api.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/api.ErrorResponse"
+                        }
+                    },
+                    "501": {
+                        "description": "Not Implemented",
+                        "schema": {
+                            "$ref": "#/definitions/api.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/employees/summary/subdepartment": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Summary"
+                ],
+                "summary": "Get salary summary by department and sub-department",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Filter by contract type",
+                        "name": "on_contract",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/employee.DepartmentSummaryResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/api.ErrorResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/api.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/api.ErrorResponse"
+                        }
+                    },
+                    "409": {
+                        "description": "Conflict",
+                        "schema": {
+                            "$ref": "#/definitions/api.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/api.ErrorResponse"
+                        }
+                    },
+                    "501": {
+                        "description": "Not Implemented",
+                        "schema": {
+                            "$ref": "#/definitions/api.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/users/login": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User"
+                ],
+                "summary": "Login a user",
+                "parameters": [
+                    {
+                        "description": "Request Body",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/user.LoginRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/user.ReadResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/api.ErrorResponse"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/api.ErrorResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/api.ErrorResponse"
+                        }
+                    },
+                    "409": {
+                        "description": "Conflict",
+                        "schema": {
+                            "$ref": "#/definitions/api.ErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/api.ErrorResponse"
+                        }
+                    },
+                    "501": {
+                        "description": "Not Implemented",
+                        "schema": {
+                            "$ref": "#/definitions/api.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "api.Error": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "details": {},
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "api.ErrorResponse": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "$ref": "#/definitions/api.Error"
+                }
+            }
+        },
+        "constant.EmployeeCurrency": {
+            "type": "string",
+            "enum": [
+                "USD",
+                "TAINRSKING"
+            ],
+            "x-enum-varnames": [
+                "EmployeeCurrencyUSD",
+                "EmployeeCurrencyINR"
+            ]
+        },
+        "constant.EmployeeDepartment": {
+            "type": "string",
+            "enum": [
+                "Administration",
+                "Banking",
+                "Engineering",
+                "Operations"
+            ],
+            "x-enum-varnames": [
+                "EmployeeDepartmentAdministration",
+                "EmployeeDepartmentBanking",
+                "EmployeeDepartmentEngineering",
+                "EmployeeDepartmentOperations"
+            ]
+        },
+        "constant.EmployeeStatus": {
+            "type": "string",
+            "enum": [
+                "Active",
+                "Inactive"
+            ],
+            "x-enum-varnames": [
+                "EmployeeStatusActive",
+                "EmployeeStatusInactive"
+            ]
+        },
+        "constant.EmployeeSubDepartment": {
+            "type": "string",
+            "enum": [
+                "Platform",
+                "Loan",
+                "CustomerOnboarding",
+                "Agriculture"
+            ],
+            "x-enum-varnames": [
+                "EmployeeSubDepartmentPlatform",
+                "EmployeeSubDepartmentLoan",
+                "EmployeeSubDepartmentCustomerOnboarding",
+                "EmployeeSubDepartmentAgriculture"
+            ]
+        },
+        "constant.UserStatus": {
+            "type": "string",
+            "enum": [
+                "Active",
+                "Inactive"
+            ],
+            "x-enum-varnames": [
+                "UserStatusActive",
+                "UserStatusInactive"
+            ]
+        },
+        "employee.DepartmentSummaries": {
+            "type": "object",
+            "properties": {
+                "department": {
+                    "type": "string"
+                },
+                "summaries": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/employee.SubDepartmentSummary"
+                    }
+                },
+                "summary": {
+                    "$ref": "#/definitions/github_com_sairahul1526_morphic_api_employee.Summary"
+                }
+            }
+        },
+        "employee.DepartmentSummaryResponse": {
+            "type": "object",
+            "properties": {
+                "summaries": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/employee.DepartmentSummaries"
+                    }
+                }
+            }
+        },
+        "employee.ReadResponse": {
+            "type": "object",
+            "properties": {
+                "created_at": {
+                    "type": "string",
+                    "example": "2024-05-27T06:50:20.056549Z"
+                },
+                "created_by": {
+                    "type": "string",
+                    "example": "e31ab6f8-d359-4c6a-83c6-bfa32229bb01"
+                },
+                "currency": {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/constant.EmployeeCurrency"
+                        }
+                    ],
+                    "example": "USD"
+                },
+                "department": {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/constant.EmployeeDepartment"
+                        }
+                    ],
+                    "example": "Engineering"
+                },
+                "id": {
+                    "type": "string",
+                    "example": "47435e2b-d8c4-41ff-9de9-2be3bfc92276"
+                },
+                "name": {
+                    "type": "string",
+                    "example": "John Doe"
+                },
+                "on_contract": {
+                    "type": "boolean",
+                    "example": true
+                },
+                "salary": {
+                    "type": "integer",
+                    "example": 100000
+                },
+                "status": {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/constant.EmployeeStatus"
+                        }
+                    ],
+                    "example": "Active"
+                },
+                "sub_department": {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/constant.EmployeeSubDepartment"
+                        }
+                    ],
+                    "example": "Platform"
+                },
+                "updated_at": {
+                    "type": "string",
+                    "example": "2024-05-27T06:50:20.056549Z"
+                },
+                "updated_by": {
+                    "type": "string",
+                    "example": "e31ab6f8-d359-4c6a-83c6-bfa32229bb01"
+                }
+            }
+        },
+        "employee.Request": {
+            "type": "object",
+            "required": [
+                "name",
+                "on_contract",
+                "salary"
+            ],
+            "properties": {
+                "currency": {
+                    "enum": [
+                        "USD",
+                        "INR"
+                    ],
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/constant.EmployeeCurrency"
+                        }
+                    ],
+                    "example": "USD"
+                },
+                "department": {
+                    "enum": [
+                        "Administration",
+                        "Banking",
+                        "Engineering",
+                        "Operations"
+                    ],
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/constant.EmployeeDepartment"
+                        }
+                    ],
+                    "example": "Engineering"
+                },
+                "name": {
+                    "type": "string",
+                    "example": "John Doe"
+                },
+                "on_contract": {
+                    "type": "boolean",
+                    "example": true
+                },
+                "salary": {
+                    "type": "integer",
+                    "example": 100000
+                },
+                "status": {
+                    "enum": [
+                        "Active",
+                        "Inactive"
+                    ],
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/constant.EmployeeStatus"
+                        }
+                    ],
+                    "example": "Active"
+                },
+                "sub_department": {
+                    "enum": [
+                        "Platform",
+                        "Loan",
+                        "CustomerOnboarding",
+                        "Agriculture"
+                    ],
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/constant.EmployeeSubDepartment"
+                        }
+                    ],
+                    "example": "Platform"
+                }
+            }
+        },
+        "employee.SubDepartmentSummary": {
+            "type": "object",
+            "properties": {
+                "sub_department": {
+                    "type": "string"
+                },
+                "summary": {
+                    "$ref": "#/definitions/github_com_sairahul1526_morphic_api_employee.Summary"
+                }
+            }
+        },
+        "github_com_sairahul1526_morphic_api_employee.Summary": {
+            "type": "object",
+            "properties": {
+                "max": {
+                    "type": "number"
+                },
+                "mean": {
+                    "type": "number"
+                },
+                "min": {
+                    "type": "number"
+                }
+            }
+        },
+        "user.LoginRequest": {
+            "type": "object",
+            "required": [
+                "password",
+                "username"
+            ],
+            "properties": {
+                "password": {
+                    "type": "string",
+                    "example": "password"
+                },
+                "username": {
+                    "type": "string",
+                    "example": "john.doe"
+                }
+            }
+        },
+        "user.ReadResponse": {
+            "type": "object",
+            "properties": {
+                "created_at": {
+                    "type": "string",
+                    "example": "2024-05-27T06:50:20.056549Z"
+                },
+                "created_by": {
+                    "type": "string",
+                    "example": "e31ab6f8-d359-4c6a-83c6-bfa32229bb01"
+                },
+                "id": {
+                    "type": "string",
+                    "example": "47435e2b-d8c4-41ff-9de9-2be3bfc92276"
+                },
+                "status": {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/constant.UserStatus"
+                        }
+                    ],
+                    "example": "Active"
+                },
+                "updated_at": {
+                    "type": "string",
+                    "example": "2024-05-27T06:50:20.056549Z"
+                },
+                "updated_by": {
+                    "type": "string",
+                    "example": "e31ab6f8-d359-4c6a-83c6-bfa32229bb01"
+                },
+                "username": {
+                    "type": "string",
+                    "example": "john.doe"
+                }
+            }
+        }
+    },
+    "securityDefinitions": {
+        "ApiKeyAuth": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        }
+    }
+}
