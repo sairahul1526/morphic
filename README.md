@@ -1,6 +1,6 @@
 # Morphic
 
-Morphic is a simple image access management service, written in Golang.
+Morphic is a simple summaries service, written in Golang.
 
 # Table of Contents
 
@@ -40,4 +40,3 @@ Morphic is a simple image access management service, written in Golang.
 
 1. Run `make test` to run all the tests
 2. Run `make test-coverage` to check the test coverage
-# morphic
